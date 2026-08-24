@@ -2,6 +2,7 @@ show databases;
 create database BankingDB;
 use BankingDB;
 
+
 CREATE TABLE Customers (
     CustomerID INT PRIMARY KEY,
     FirstName VARCHAR(50),
@@ -175,4 +176,82 @@ values
 (203,103,'Savings',45000),
 (204,104,'Current',60000),
 (205,105,'Savings',45000);
+
+select * from customers
+where customerid in (101,102,103);
+
+desc accounts;
+
+select * from accounts
+where accounttype = 'Current';
+
+select * from accounts
+where balance < 45000;
+
+select * from accounts;
+
+select * from customers
+where customerid in (104,105);
+
+select* from customers
+where FirstName like 'S%';
+
+select * from CUSTOMERS 
+order by lastname desc;
+
+
+select * from transactions;
+
+insert into transactions values 
+(301,'2025-05-10',5000,'Deposit',201),
+(303,'2025-05-12',10000,'Deposit',203),
+(304,'2025-05-13',3000,'Withdraw',204),
+(305,'2025-05-14',7000,'Deposit',205);
+
+select * from transactions
+order by amount desc
+limit 5;
+
+select distinct transactiontype from transactions;
+
+select * from transactions
+limit 3,2;
+
+select * from transactions
+where amount between 1000 and 8000;
+
+select *  from accounts
+order by balance desc
+limit 3;
+
+select * from transactions
+limit 4 offset 2;
+
+select accountID, balance,
+case 
+when balance >= 50000 then 'Premium Account'
+when balance >= 25000 then 'Standard Account'
+else 'Basic account'
+end as AccountCatogery
+from accounts;
+
+select Accountid, balance,
+dense_rank() over(order by balance desc)
+ as BalanceRank
+from accounts;
+
+select * from transactions;
+insert into transactions values (302,'2025-05-11',2500,'Withdraw',202);
+
+select transactionID, AMOUNT,
+sum(amount) over(order by transactiondate) as RunningTotal
+from transactions;
+
+select transactionID, AMOUNT,
+sum(amount) over() as RunningTotal
+from transactions;
+
+select transactionid, amount, 
+avg(amount) over() as avgtransaction
+from transactions;
 
