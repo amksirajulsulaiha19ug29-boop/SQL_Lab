@@ -331,4 +331,81 @@ SELECT
         'Young') AS Category
 FROM
     customers;
+    
+    
+--     displays all customer firstname in uppercase
+    SELECT FIRSTNAME,
+    UPPER(FIRSTNAME) AS UpperCaseName
+    FROM CUSTOMERS;
+    
+--     displays the length of name
+ SELECT FIRSTNAME,
+    length(FIRSTNAME) AS length_Name
+    FROM CUSTOMERS;
 
+--     displays all customer name in lowercase
+ SELECT FIRSTNAME,
+    lower(FIRSTNAME) AS lowerCaseName
+    FROM CUSTOMERS;
+    
+use bankingdb;
+    
+--     to get year out of DOB in data
+    select customerid,
+    year(dateofbirth) as birth_year
+    from customers;
+    
+    --     to get month out of DOB in data
+    select customerid,
+    month(dateofbirth) as birth_month
+    from customers;
+    
+--     to get date diiferenece between 2 dates
+     select customerid,
+datediff(curdate(),dateofbirth) as days
+    from customers;
+    
+
+update customers set phone=null where customerid=103;
+    select * from customers;
+    
+-- IFNULL = IF IT IS NULL FULL IN WITH GIVEN RESULT
+SELECT 
+    firstname, 
+    IFNULL(phone, 'Not Available') AS PhoneNumber
+FROM
+    customers;
+    
+    
+    SELECT GREATEST('1998-03-23','2000-09-20','1995-06-18','1997-09-12','1993-11-25') AS LATESTBD;
+    
+    
+    SELECT greatest('HELLO','HI','BYE','ZEE');
+    SELECT least('HELLO','HI','BYE','ZEE');
+    select ascii('s');
+    select ascii('S');
+    select ascii('$');
+    select ascii('-');
+    select ascii(1);
+    
+-- nullif = "make it null if it satisfy the condition" (diff from ifnull)
+select firstname,
+    nullif(firstname,'Priya') as result
+    from customers;
+    
+    
+select min(balance) as lowest_balance
+from accounts;
+
+select count(*) as total_account
+from accounts;
+
+select accounttype, sum(balance) as Total_Balance
+from accounts
+group by AccountType;
+
+select accounttype, sum(balance) as Total_Balance
+from accounts
+group by AccountType
+having total_balance > 100000;    
+    
